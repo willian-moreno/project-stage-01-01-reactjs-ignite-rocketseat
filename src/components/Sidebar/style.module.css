@@ -1,0 +1,82 @@
+.sidebar {
+  background: var(--gray-800);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.sidebar__cover {
+  background: url('https://source.unsplash.com/768x216/?abstract') no-repeat center center/cover;
+  background-color: var(--gray-600);
+
+  width: 100%;
+  height: 72px;
+}
+
+.sidebar__profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar__profile__avatar {
+  --avatar-size: calc(5rem + 12px);
+
+  display: block;
+
+  background: url('https://github.com/willian-moreno.png') no-repeat center center/cover;
+  background-color: var(--gray-500);
+
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+
+  margin: calc(0px - var(--avatar-size) / 2) auto 1.6rem;
+
+  border: 4px solid var(--gray-800);
+  border-radius: 5px;
+  outline: 2px solid var(--green-500);
+}
+
+.sidebar__profile strong {
+  color: var(--gray-100);
+}
+
+.sidebar__profile span {
+  font-size: 1.4rem;
+  color: var(--gray-400);
+}
+
+.sidebar__footer {
+  border-top: 1px solid var(--gray-600);
+  margin-top: 2.4rem;
+  padding: 2.4rem 3.2rem 3.2rem;
+}
+
+.sidebar__footer__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  background: transparent;
+  color: var(--green-500);
+
+  border: 1px solid var(--green-500);
+  border-radius: 8px;
+
+  height: 5rem;
+  padding: 0 2.4rem;
+
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  text-wrap: nowrap;
+
+  transition:
+    background .15s ease,
+    color .15s ease;
+}
+
+.sidebar__footer__link:hover {
+  background: var(--green-500);
+  color: var(--white);
+}
