@@ -14,3 +14,10 @@
     grid-template-columns: 25.6rem 1fr;
   }
 }
+
+.posts {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3.2rem;
+}

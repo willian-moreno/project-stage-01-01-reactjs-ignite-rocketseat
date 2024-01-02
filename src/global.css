@@ -13,13 +13,18 @@
   --gray-900: #121214;
 
   --green-500: #00875F;
-  --green-400: #00B37E;
+  --green-300: #00B37E;
 
   --red-500: #F75A68;
 }
 
 html {
   font-size: 62.5%;
+}
+
+:focus-visible {
+  outline: transparent;
+  box-shadow: 0 0 0 2px var(--green-500);
 }
 
 * {
@@ -40,4 +45,5 @@ input,
 textarea,
 button {
   font: 400 1.6rem/160% 'Roboto', 'Arial', sans-serif;
+  line-height: 1.6;
 }
