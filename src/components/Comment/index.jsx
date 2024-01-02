@@ -2,8 +2,21 @@ import { ThumbsUp, Trash } from 'phosphor-react';
 import { Avatar } from '../Avatar';
 import style from './style.module.css';
 
+/**
+ * @param {{
+ *  id: string,
+ *  content: string,
+ *  onClickRemove: Function
+ * }} props 
+ * @returns 
+ */
+export function Comment(props) {
+  const { id, content, onClickRemove } = props
 
-export function Comment() {
+  function handleRemoveComment() {
+    onClickRemove(id)
+  }
+
   return (
     <div className={style.comment}>
       <Avatar src="https://github.com/willian-moreno.png" />
@@ -21,12 +34,13 @@ export function Comment() {
             <button
               className={style.comment__box__content__profile__deleteComment}
               title="Deletar comentário"
+              onClick={handleRemoveComment}
             >
               <Trash size={24} />
             </button>
           </header>
           <p className={style.comment__box__content__comment}>
-            Muito bom, parabéns!! 👏👏
+            {content}
           </p>
         </div>
         <footer className={style.comment__box__footer}>

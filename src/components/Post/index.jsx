@@ -1,48 +1,87 @@
+import { format, formatDistanceToNow } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+
 import style from './style.module.css';
 
+import { useState } from 'react';
 import { Avatar } from '../Avatar';
 import { Comment } from '../Comment';
 
-export function Post() {
+/**
+ * @param {{
+ *  author: { avatarUrl: string, name: string, role: string }, 
+ *  publishedAt: Date, 
+ *  content: { type: 'paragraph' | 'link', content: string }[]
+ * }} props 
+ * @returns 
+ */
+export function Post(props) {
+  const { author, content, publishedAt } = props
+
+  const [comments, setComments] = useState([{ id: 1, content: 'Muito bom, parabéns!! 👏👏' }])
+  const [newCommentText, setNewCommentText] = useState('')
+
+  const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", { locale: ptBR })
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, { locale: ptBR, addSuffix: true })
+
+  function handleCreateNewComment(event) {
+    event.preventDefault()
+
+    setComments([...comments, { id: comments.length + 1, content: newCommentText }])
+    setNewCommentText('')
+  }
+
+  function handleNewCommentChange(event) {
+    setNewCommentText(event.target.value)
+  }
+
+  function handleRemoveComment(id) {
+    const filteredComments = comments.filter(comment => comment.id !== id)
+    setComments([...filteredComments])
+  }
+
   return (
     <article className={style.post}>
       <header className={style.post__header}>
         <div className={style.post__header__author}>
           <Avatar
-            src="https://github.com/willian-moreno.png"
+            src={author.avatarUrl}
             variant="outlined"
           />
           <div className={style.post__header__author__details}>
-            <strong>Willian Moreno</strong>
-            <span>Dev Front-End</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
         <time
-          title="01 de janeiro às 09:40"
-          dateTime="2024-01-01 09:40:00"
+          title={publishedDateFormatted}
+          dateTime={format(publishedAt, "yyyy-MM-dd HH:mm:ss")}
           className={style.post__header__author__publishedAt}
-        >Publicado a 1h</time>
+        >{publishedDateRelativeToNow}</time>
       </header>
       <div className={style.post__content}>
-        <p>
-          Fala galeraa 👋
-        </p>
-        <p>
-          Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
-        </p>
-        <p>
-          👉 <a href="#">jane.design/doctorcare</a>
-        </p>
-        <p>
-          <a href="#">#novoprojeto</a> <a href="#">#nlw</a> <a href="#">#rocketseat</a>
-        </p>
+        {content.map((line, index) => {
+          if (line.type === 'paragraph') {
+            return <p key={index}>{line.content}</p>
+          }
+
+          if (line.type === 'link') {
+            return <p key={index}><a href="#">{line.content}</a></p>
+          }
+        })}
       </div>
 
-      <form className={style.post__commentForm}>
+      <form
+        className={style.post__commentForm}
+        onSubmit={handleCreateNewComment}
+      >
         <strong>Deixe seu feedback</strong>
         <textarea
-          className={style.post__commentForm__commentArea}
+          name="comment"
+          value={newCommentText}
           placeholder="Deixe um comentário"
+          className={style.post__commentForm__commentArea}
+          onChange={handleNewCommentChange}
         />
         <footer className={style.post__commentForm__footer}>
           <button
@@ -53,9 +92,16 @@ export function Post() {
       </form>
 
       <div className={style.post__comments}>
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.map(comment => {
+          return (
+            <Comment
+              key={comment.id}
+              id={comment.id}
+              content={comment.content}
+              onClickRemove={handleRemoveComment}
+            />
+          )
+        })}
       </div>
     </article>
   );
