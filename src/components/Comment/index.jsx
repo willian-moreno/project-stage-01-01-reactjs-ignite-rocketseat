@@ -13,10 +13,6 @@ import style from './style.module.css';
 export function Comment(props) {
   const { id, content, onClickRemove } = props
 
-  function handleRemoveComment() {
-    onClickRemove(id)
-  }
-
   return (
     <div className={style.comment}>
       <Avatar src="https://github.com/willian-moreno.png" />
@@ -34,7 +30,7 @@ export function Comment(props) {
             <button
               className={style.comment__box__content__profile__deleteComment}
               title="Deletar comentário"
-              onClick={handleRemoveComment}
+              onClick={() => onClickRemove(id)}
             >
               <Trash size={24} />
             </button>
