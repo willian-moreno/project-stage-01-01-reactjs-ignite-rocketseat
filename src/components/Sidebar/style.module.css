@@ -38,6 +38,12 @@
   padding: 2.4rem 3.2rem 3.2rem;
 }
 
+@media (max-width: 768px) {
+  .sidebar__footer {
+    padding: 2rem;
+  }
+}
+
 .sidebar__footer__link {
   display: flex;
   align-items: center;
