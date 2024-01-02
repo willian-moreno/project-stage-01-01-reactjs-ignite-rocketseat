@@ -19,21 +19,8 @@
 }
 
 .sidebar__profile__avatar {
-  --avatar-size: calc(5rem + 12px);
-
   display: block;
-
-  background: url('https://github.com/willian-moreno.png') no-repeat center center/cover;
-  background-color: var(--gray-500);
-
-  width: var(--avatar-size);
-  height: var(--avatar-size);
-
   margin: calc(0px - var(--avatar-size) / 2) auto 1.6rem;
-
-  border: 4px solid var(--gray-800);
-  border-radius: 5px;
-  outline: 2px solid var(--green-500);
 }
 
 .sidebar__profile strong {
