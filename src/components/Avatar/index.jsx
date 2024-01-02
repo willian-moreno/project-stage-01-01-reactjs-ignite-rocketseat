@@ -7,13 +7,11 @@ import style from './style.module.css'
  *  className?: string,
  * }} props 
  */
-export function Avatar(props) {
-  const { src, variant, className } = {
-    src: '',
-    variant: 'initial',
-    className: '',
-    ...props
-  }
+export function Avatar({
+  src = '',
+  variant = 'initial',
+  className = ''
+}) {
 
   const classes = [
     style.avatar,
@@ -23,7 +21,6 @@ export function Avatar(props) {
   return (
     <img
       className={classes}
-      // eslint-disable-next-line react/no-unknown-property
       variant={variant}
       src={src}
     />
