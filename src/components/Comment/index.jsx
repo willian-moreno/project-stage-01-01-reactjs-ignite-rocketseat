@@ -6,7 +6,7 @@ import style from './style.module.css';
  * @param {{
  *  id: string,
  *  content: string,
- *  onRemoveComment: Function
+ *  onRemoveComment: (id: string) => void
  * }} props 
  * @returns 
  */
