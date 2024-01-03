@@ -1,4 +1,5 @@
 import { ThumbsUp, Trash } from 'phosphor-react';
+import { useState } from 'react';
 import { Avatar } from '../Avatar';
 import style from './style.module.css';
 
@@ -12,6 +13,16 @@ import style from './style.module.css';
  */
 export function Comment(props) {
   const { id, content, onRemoveComment } = props
+
+  const [applauseCount, setApplauseCount] = useState(0)
+
+  function handleRemoveCommentById() {
+    onRemoveComment(id)
+  }
+
+  function handleAddNewApplause() {
+    setApplauseCount((state) => state + 1)
+  }
 
   return (
     <div className={style.comment}>
@@ -30,7 +41,7 @@ export function Comment(props) {
             <button
               className={style.comment__box__content__profile__deleteComment}
               title="Deletar comentário"
-              onClick={() => onRemoveComment(id)}
+              onClick={handleRemoveCommentById}
             >
               <Trash size={24} />
             </button>
@@ -40,9 +51,12 @@ export function Comment(props) {
           </p>
         </div>
         <footer className={style.comment__box__footer}>
-          <button className={style.comment__box__footer__button}>
+          <button
+            className={style.comment__box__footer__button}
+            onClick={handleAddNewApplause}
+          >
             <ThumbsUp size={20} />
-            Aplaudir<span>20</span>
+            Aplaudir <span>{applauseCount}</span>
           </button>
         </footer>
       </div>
