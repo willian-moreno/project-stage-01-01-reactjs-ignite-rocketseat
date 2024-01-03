@@ -6,12 +6,12 @@ import style from './style.module.css';
  * @param {{
  *  id: string,
  *  content: string,
- *  onClickRemove: Function
+ *  onRemoveComment: Function
  * }} props 
  * @returns 
  */
 export function Comment(props) {
-  const { id, content, onClickRemove } = props
+  const { id, content, onRemoveComment } = props
 
   return (
     <div className={style.comment}>
@@ -30,7 +30,7 @@ export function Comment(props) {
             <button
               className={style.comment__box__content__profile__deleteComment}
               title="Deletar comentário"
-              onClick={() => onClickRemove(id)}
+              onClick={() => onRemoveComment(id)}
             >
               <Trash size={24} />
             </button>

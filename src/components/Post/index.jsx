@@ -35,7 +35,7 @@ export function Post(props) {
     setNewCommentText(event.target.value)
   }
 
-  function handleRemoveComment(id) {
+  function removeComment(id) {
     const filteredComments = comments.filter(comment => comment.id !== id)
     setComments([...filteredComments])
   }
@@ -98,7 +98,7 @@ export function Post(props) {
               key={comment.id}
               id={comment.id}
               content={comment.content}
-              onClickRemove={handleRemoveComment}
+              onRemoveComment={removeComment}
             />
           )
         })}
