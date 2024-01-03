@@ -60,13 +60,13 @@ export function Post(props) {
         >{publishedDateRelativeToNow}</time>
       </header>
       <div className={style.post__content}>
-        {content.map((line, index) => {
+        {content.map(line => {
           if (line.type === 'paragraph') {
-            return <p key={index}>{line.content}</p>
+            return <p key={line}>{line.content}</p>
           }
 
           if (line.type === 'link') {
-            return <p key={index}><a href="#">{line.content}</a></p>
+            return <p key={line}><a href="#">{line.content}</a></p>
           }
         })}
       </div>
